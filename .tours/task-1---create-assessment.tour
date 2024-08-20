@@ -3,18 +3,13 @@
   "title": "Task 1 - Create Assessment",
   "steps": [
     {
-      "file": "packages/client/package.json",
-      "description": "# Start Application\n\nREMINDER: In order to run the application, you will have to run some commands.\n_______________________________________________\n\nCOMMANDS:\n\nOpen a terminal within vscode and type these commands into that terminal and hit \"enter\" or \"return\":\n\n- Navigate into the OCAT directory (folder) with the command \"`cd packages/client/`\"\n- `npm install`\n- `npm start`\n- Open the browser and go to http://localhost:3000 to verify that your application is running",
-      "line": 6
-    },
-    {
       "file": "packages/client/src/pages/Assessments/NewAssessment.jsx",
       "description": "# Create Form\n\nUse the provided Assessment Info in [docs/assessment_info.md](https://github.com/UC-ITSC/OCAT-Intern-Template/blob/main/docs/assessment_info.md) to create an assessment form for the front-end using the library \"`react-hook-form`\"\n\nInstall and implement \"`react-hook-form`\" by following the [documented instructions](https://www.npmjs.com/package/react-hook-form)\n",
       "line": 6
     },
     {
-      "file": "packages/client/src/services/AssessmentService.js",
-      "description": "# Axios Service Request\n\nInside the `AssessmentService.submit()` function, send a POST request to `/api/assessment/submit` using the axios library that contains the assessment data from the front-end form.\n\nThis will go to the back-end Express server in the file [packages/api/src/routes/Assessment/index.js](./packages/api/src/routes/Assessment/index.js)",
+      "file": "packages/client/package.json",
+      "description": "# Start Application\n\nREMINDER: In order to run the application, you will have to run some commands.\n_______________________________________________\n\nCOMMANDS:\n\nOpen a terminal within vscode and type these commands into that terminal and hit \"enter\" or \"return\":\n\n- Navigate into the OCAT directory (folder) with the command \"`cd packages/client/`\"\n- `npm install`\n- `npm start`\n- Open the browser and go to http://localhost:3000 to verify that your application is running",
       "line": 6
     },
     {
@@ -22,6 +17,11 @@
       "description": "# Config\n\n1. Setup your PostgreSQL instance in a Docker container using the step-by-step instructions provided in [docs/install_postgres.md](https://github.com/UC-ITSC/OCAT-Intern-Template/blob/main/docs/install_postgres.md)\n2. Duplicate this file using copy + paste\n3. Rename this file to local.json\n4. Supply the correct values to match your PostgreSQL instance\n5. Remove any values that you don't change from the default.json",
       "line": 1,
       "title": "Config"
+    },
+    {
+      "file": "packages/client/src/services/AssessmentService.js",
+      "description": "# Axios Service Request\n\nInside the `AssessmentService.submit()` function, send a POST request to `/api/assessment/submit` using the axios library that contains the assessment data from the front-end form.\n\nThis will go to the back-end Express server in the file [packages/api/src/routes/Assessment/index.js](./packages/api/src/routes/Assessment/index.js)",
+      "line": 6
     },
     {
       "file": "packages/api/package.json",
