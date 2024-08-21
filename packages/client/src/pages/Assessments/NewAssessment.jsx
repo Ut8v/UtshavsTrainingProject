@@ -1,12 +1,11 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { AssessmentService } from '../../services/AssessmentService';
 export const NewAssessment = () => {
-
+  const [ displayResponse, setDisplayResponse ] = useState();
   const instrumentType = `Cat Behavioral Instrument`;
-
   const {
     formState: { errors },
     handleSubmit,
@@ -31,8 +30,9 @@ export const NewAssessment = () => {
     // eslint-disable-next-line sort-keys
     const finalData = { catName, catDateOfBirth, score, riskLevel, currentTimeDate, instrumentType };
 
-    console.log(finalData);
-    await AssessmentService.submit(finalData);
+    // console.log(finalData);
+    const response = await AssessmentService.submit(finalData);
+    setDisplayResponse(response.message);
   };
   // takes in data and converts it to number and adds all the number and returns the score
   const calculateScore = (data) => {
@@ -51,23 +51,24 @@ export const NewAssessment = () => {
 
   const style = {
     color: `black`,
-    fontSize: `40px`,
-
+    fontSize: `30px`,
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <h2>{instrumentType}</h2>
+      <h2 className="instrument">{instrumentType}</h2>
 
-      <div>
-        <Form.Label style={style}>Cat Name</Form.Label>
+      <div className="input">
+        <Form.Label>Cat Name</Form.Label>
         <Form.Control
+          className="input-fields"
           required type="text"
           placeholder="Cat Name"
           name="Cat Name"{...register(`catName`)} />
 
-        <Form.Label style={style}>Cat Date of Birth</Form.Label>
+        <Form.Label >Cat Date of Birth</Form.Label>
         <Form.Control
+          className="input-fields"
           required type="date"
           placeholder="Cat Date of Birth"
           name="Cat Date of Birth" {...register(`catDateOfBirth`)} />
@@ -169,6 +170,7 @@ export const NewAssessment = () => {
           required />
       </div>
       <Button variant="primary" style={ { marginLeft: `50%` } } type="submit">Submit</Button>
+      <span className="response-display">{displayResponse}</span>
     </Form>
   );
 
