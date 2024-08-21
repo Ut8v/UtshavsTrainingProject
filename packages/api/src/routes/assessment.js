@@ -33,9 +33,10 @@ assessmentRouter.get(
   `/`,
   async (req, res, next) => {
     try {
+      console.log(req.body);
       // verify that your data is making it here to the API by using console.log();
       // call the AssessmentService.getList function from packages/api/src/microservices/Assessment-Service.js
-      const assessments = [];
+      const assessments = [ AssessmentService.getList() ];
 
       ResponseHandler(
         res,

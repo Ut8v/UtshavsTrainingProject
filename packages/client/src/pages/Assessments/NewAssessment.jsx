@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -14,6 +15,7 @@ export const NewAssessment = () => {
   // console.log(register);
   // create a form that utilizes the "onSubmit" function to send data to
   // packages/client/src/services/AssessmentService.js and then onto the packages/api/src/routes/assessment express API
+
   const onSubmit = async (data) => {
     const dataArray =
       [ data.HissesAtStrangers,
@@ -47,59 +49,126 @@ export const NewAssessment = () => {
     return `High`;
   };
 
+  const style = {
+    color: `black`,
+    fontSize: `40px`,
+
+  };
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <h2>{instrumentType}</h2>
+
       <div>
-        <label htmlFor="Cat Name">Cat Name</label>
-        <input required type="text" placeholder="Cat Name" name="Cat Name"{...register(`catName`)} />
-        <label htmlFor="Cat Date of Birth">Cat Date of Birth</label>
-        <input required type="date"
+        <Form.Label style={style}>Cat Name</Form.Label>
+        <Form.Control
+          required type="text"
+          placeholder="Cat Name"
+          name="Cat Name"{...register(`catName`)} />
+
+        <Form.Label style={style}>Cat Date of Birth</Form.Label>
+        <Form.Control
+          required type="date"
           placeholder="Cat Date of Birth"
           name="Cat Date of Birth" {...register(`catDateOfBirth`)} />
       </div>
-      <h1>Previous Contact with the Cat Judical System</h1>
+
+      <Form.Text style={style}>Previous Contact with the Cat Judical System</Form.Text>
       <div>
-        <input {...register(`PreviousContact`)}
-          type="radio" id="prevContact" value="1" required />
-        <label htmlFor="Yes">Yes</label>
-        <input {...register(`PreviousContact`)}
-          type="radio" id="prevContact" value="0" required />
-        <label htmlFor="prevContact">No</label>
+        <Form.Check
+          label="Yes"
+          {...register(`PreviousContact`)}
+          type="radio"
+          id="prevContact"
+          value="1"
+          required />
+
+        <Form.Check
+          label="No"
+          {...register(`PreviousContact`)}
+          type="radio"
+          id="prevContact"
+          value="0"
+          required />
+
       </div>
 
-      <h1>Physical Altercations with other cats</h1>
+      <Form.Text style={style}>Physical Altercations with other cats</Form.Text>
       <div>
-        <input {...register(`PhysicalAltercationsWithCats`)} type="radio" id="altercations-cat" value={1} required />
-        <label htmlFor="altercations-cat">Yes</label>
-        <input {...register(`PhysicalAltercationsWithCats`)} type="radio" id="altercations-cat" value={0} required />
-        <label htmlFor="altercations-cat">No</label>
+        <Form.Check
+          label="Yes"
+          {...register(`PhysicalAltercationsWithCats`)}
+          type="radio"
+          id="altercations-cat"
+          value={1}
+          required />
+
+        <Form.Check
+          label="No"
+          {...register(`PhysicalAltercationsWithCats`)}
+          type="radio"
+          id="altercations-cat"
+          value={0}
+          required />
+
       </div>
 
-      <h1>Physical Altercations with owner (scratching,biting,etc...)</h1>
+      <Form.Text style={style}>Physical Altercations with owner (scratching,biting,etc...)</Form.Text>
       <div>
-        <input {...register(`PhysicalAltercationsWithOwner`)} type="radio" id="altercations-owner" value={0} required />
-        <label htmlFor="altercations-owner">0-3 (score = 0)</label>
-        <input {...register(`PhysicalAltercationsWithOwner`)} type="radio" id="altercations-owner" value={1} required />
-        <label htmlFor="altercations-owner">3+ (score = 1)</label>
+        <Form.Check
+          label="0-3"
+          {...register(`PhysicalAltercationsWithOwner`)}
+          type="radio"
+          id="altercations-owner"
+          value={0}
+          required />
+        <Form.Check
+          label="3+"
+          {...register(`PhysicalAltercationsWithOwner`)}
+          type="radio"
+          id="altercations-owner"
+          value={1}
+          required />
       </div>
 
-      <h1>Plays well with dogs</h1>
+      <Form.Text style={style}>Plays well with dogs</Form.Text>
       <div>
-        <input {...register(`PlaysWellWithDogs`)} type="radio" id="plays-well" value={0} required />
-        <label htmlFor="plays-well">Yes</label>
-        <input {...register(`PlaysWellWithDogs`)} type="radio" id="plays-well" value={1} required />
-        <label htmlFor="plays-well">No</label>
+        <Form.Check
+          label="Yes"
+          {...register(`PlaysWellWithDogs`)}
+          type="radio"
+          id="plays-well"
+          value={0}
+          required />
+
+        <Form.Check
+          label="No"
+          {...register(`PlaysWellWithDogs`)}
+          type="radio"
+          id="plays-well"
+          value={1}
+          required />
       </div>
 
-      <h1>Hisses at strangers</h1>
+      <Form.Text style={style}>Hisses at strangers</Form.Text>
       <div>
-        <input {...register(`HissesAtStrangers`)} type="radio" id="hisses" value={0} required />
-        <label htmlFor="hisses">Yes</label>
-        <input {...register(`HissesAtStrangers`)} type="radio" id="hisses" value={1} required />
-        <label htmlFor="hisses">No</label>
+        <Form.Check
+          label="yes"
+          {...register(`HissesAtStrangers`)}
+          type="radio"
+          id="hisses"
+          value={1}
+          required />
+
+        <Form.Check
+          label="No"
+          {...register(`HissesAtStrangers`)}
+          type="radio"
+          id="hisses"
+          value={1}
+          required />
       </div>
-      <Button variant="primary" type="submit">Submit</Button>
+      <Button variant="primary" style={ { marginLeft: `50%` } } type="submit">Submit</Button>
     </Form>
   );
 
