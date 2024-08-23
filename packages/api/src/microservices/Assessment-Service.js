@@ -5,7 +5,7 @@ exports.submit = async (assessment) => {
   // use the sequelize model Assessments from packages/api/src/database/models to save
   // the assessment data in the PostgreSQL database
   try {
-    Assessment.create({
+    await Assessment.create({
       catName: assessment.catName,
       catDateOfBirth: assessment.catDateOfBirth,
       score: assessment.score,
@@ -14,6 +14,7 @@ exports.submit = async (assessment) => {
       instrumentType: 1,
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
   }
 };
@@ -23,6 +24,13 @@ exports.getList = async () => {
   // the assessment data from the PostgreSQL database
   // const assessments = [ ];
   const assessments = await Assessment.findAll();
-  // console.log(assessments);
+  return assessments;
+};
+
+exports.Delete = async (assessment) => {
+
+  // console.log(assessment);
+  const assessments = await Assessment.destroy({ where: { id: assessment } });
+
   return assessments;
 };

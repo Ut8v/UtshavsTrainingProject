@@ -6,7 +6,7 @@ export class AssessmentService {
       // Choose the correct method, url, and data to send
       // in a request to the express packages/api/src/routes/assessment.js
       // NOTE: the http.config file automatically adds /api to the front of your url
-      return Axios.post(`/assessment`, { assessment })
+      return Axios.post(`/assessment/submit`, { assessment })
         .then(response => response.data);
     }
     catch (err) {
@@ -19,12 +19,22 @@ export class AssessmentService {
       // Choose the correct method, url, and data to send
       // in a request to the express packages/api/src/routes/assessment.js
       // NOTE: the http.config file automatically adds /api to the front of your url
-      return Axios.get(`/assessment`, {
+      return Axios.get(`/assessment/all`, {
         params: {
         },
       })
         .then(response => response.data.data.assessments);
       // response.data.data.assessment
+    }
+    catch (err) {
+      throw new Error(`${err.response.statusText} - ${err.response.data.message}`);
+    }
+  }
+
+  static deleteAssessment(assessmentId) {
+    try {
+      return Axios.delete(`/assessment/delete/${assessmentId}`)
+        .then(response => response.data);
     }
     catch (err) {
       throw new Error(`${err.response.statusText} - ${err.response.data.message}`);

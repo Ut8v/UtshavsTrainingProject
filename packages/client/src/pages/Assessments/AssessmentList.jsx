@@ -1,19 +1,26 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { useGlobalFilter, useTable } from 'react-table';
+import { useGlobalFilter, useSortBy, useTable } from 'react-table';
 import { AssessmentService } from '../../services/AssessmentService';
 
 export const AssessmentList = () => {
   const [ assessments, setAssessments ] = useState([]);
-  console.log(assessments);
+  const [ deleteResponse, setDeleteResponse ] = useState();
+  const [ deletedId, setDeletedId ] = useState();
   // fetch all assessments using the AssessmentService.getList function from OCAT/client/services/AssessmentService.js
+
   useEffect(() => {
     const fetchAssessments = async () => {
       setAssessments(await AssessmentService.getList());
     };
     fetchAssessments();
-  }, []);
-  const handleDelete = () => {};
+  }, [ deletedId ]);
+
+  const handleDelete = async (id) => {
+    const response = await AssessmentService.deleteAssessment(id);
+    setDeleteResponse(response.message);
+    setDeletedId(id);
+  };
 
   const COLUMNS = [
     {
@@ -40,8 +47,15 @@ export const AssessmentList = () => {
       Header: `Instrument Type`,
       accessor: `instrumentType`,
     },
+    {
+      Header: `Button`,
+      // eslint-disable-next-line sort-keys
+      Cell: ({ cell }) => <button onClick={() => handleDelete(cell.row.values.id)}>Delete</button>,
+    },
   ];
+
   const columns = useMemo(() => COLUMNS, []);
+  // use react table
   const {
     getTableBodyProps,
     getTableProps,
@@ -50,10 +64,12 @@ export const AssessmentList = () => {
     rows,
     setGlobalFilter,
     state,
-  } = useTable({ columns, data: assessments }, useGlobalFilter);
+  } = useTable({ columns, data: assessments }, useGlobalFilter, useSortBy);
 
   const { globalFilter } = state;
-
+  /* <th {...column.getHeaderProps()}>
+  {column.render(`Header`)}
+</th>*/
   return (
     <div className="container">
       <div className="search-container">
@@ -69,8 +85,11 @@ export const AssessmentList = () => {
           {headerGroups.map((headerGroup) =>
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) =>
-                <th {...column.getHeaderProps()}>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render(`Header`)}
+                  <span>
+                    { column.isSorted ? column.isSortedDesc ? ` 🔽` : `🔼` : ``}
+                  </span>
                 </th>)}
             </tr>)}
         </thead>
