@@ -26,7 +26,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.assessments (
     id integer NOT NULL,
-    instrument_type integer NOT NULL,
+    instrument_type text NOT NULL,
     score integer NOT NULL,
     risk_level text NOT NULL,
     cat_name text NOT NULL,

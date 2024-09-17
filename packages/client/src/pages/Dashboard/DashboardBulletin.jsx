@@ -1,4 +1,5 @@
 import React from 'react';
+import { AssessmentList } from '../Assessments/AssessmentList';
 
 export const DashboardBulletin = () =>
   <div>
